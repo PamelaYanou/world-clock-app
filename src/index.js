@@ -25,3 +25,18 @@ function updateTimeSydney() {
   );
 }
 setInterval(updateTimeSydney, 1000);
+let townSelectElement = document.querySelector("#form");
+townSelectElement.addEventListener("change", updateCity);
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
+  let townName = cityTimeZone.replace("_", " ").split("/")[1];
+  let townTime = moment().tz(cityTimeZone);
+  let citiesElement = document.querySelector("#towns");
+  citiesElement.innerHTML = ` <div class="city">
+  <h2>${townName}</h2>
+          <div class="time">${townTime.format(
+            "h:mm:ss"
+          )} <small>${townTime.format("A")}</small></div>
+          <div class="date">${townTime.format("MMMM	Do YYYY")}</</div>
+  </div>`;
+}
