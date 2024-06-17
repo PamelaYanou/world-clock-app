@@ -29,6 +29,9 @@ let townSelectElement = document.querySelector("#form");
 townSelectElement.addEventListener("change", updateCity);
 function updateCity(event) {
   let cityTimeZone = event.target.value;
+  if (cityTimeZone === "current") {
+    cityTimeZone = moment.tz.guess();
+  }
   let townName = cityTimeZone.replace("_", " ").split("/")[1];
   let townTime = moment().tz(cityTimeZone);
   let citiesElement = document.querySelector("#towns");
